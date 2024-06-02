@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Alumnos</title>
+    <!-- pasamos el boostrap que son plantillas CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("form").submit(function (e) {
+                $("input:text").filter(function () {
+                    return $(this).val() == "";
+                }).attr("disabled", "disabled");
+                return true;
+            });
+
+            $(".orden").click(function (e) {
+                e.preventDefault();
+                $("#orden").val($(this).attr("data-field"));
+                $("form").submit();
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Lista de Alumnos</h1>
+    <h1>Daniela Sanvicente</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th><a class="orden" href="#" data-field="matricula">Matricula</a></th>
+        <th><a class="orden" href="#" data-field="nombre">Nombre</a></th>
+        <th><a class="orden" href="#" data-field="paterno">Paterno</a></th>
+        <th><a class="orden" href="#" data-field="fnac">Fecha Nac.</a></th>
+        <th><a class="orden" href="#" data-field="estatura">Estatura</a></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each = "a : ${alumnos}">
+        <td th:text="${a.matricula}">Matricula</td>
+        <td th:text="${a.nombre}">Nombre</td>
+        <td th:text="${a.paterno}">Paterno</td>
+        <td th:text="${a.fnac}">Fecha de Nacimiento</td>
+        <td th:text="${a.estatura}">Estatura</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
